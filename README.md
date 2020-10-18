@@ -1,5 +1,4 @@
 ## Learn Basics of Rust - Building Guessing game
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/krtkeyan/Rust-Learning-Basics-01-Guessing-game)
 
 >>>Learning by doing is always the best way to learn new concepts. It's a mixed moments of "Got it" and when you try things, you might wonder "What did I missed out" checking some syntax corrections, ups and downs but end when you make your program work, that's really a great feeling.
 
@@ -7,10 +6,10 @@ This hands-on includes series of excercises, focused on concepts who might want 
 Each excercise can be followed with set of instructions, where you will learn the concepts for the things you build.
 
 Below are the branch names, you can checkout into and learn the concepts,
-1. `01-Setting-up` ( Installtion and running rust programs )
-2. `02-getting-input-and-variables`
-3. `03-external-dependencies-and-match-expr`
-4. `04-loops-and-finish-up-guessing-game`
+1. [`01-Setting-up`](https://github.com/krtkeyan/Rust-Learning-Basics-01-Guessing-game/tree/01-Setting-up) ( Installtion and running rust programs )
+2. [`02-getting-input-and-variables`](https://github.com/krtkeyan/Rust-Learning-Basics-01-Guessing-game/tree/02-getting-input-and-variables)
+3. [`03-external-dependencies-and-match-expr`](https://github.com/krtkeyan/Rust-Learning-Basics-01-Guessing-game/tree/02-getting-input-and-variables)
+4. [`04-loops-and-finish-up-guessing-game`](https://github.com/krtkeyan/Rust-Learning-Basics-01-Guessing-game/tree/02-getting-input-and-variables)
 
 #### Concepts you will learn, while you building guessing game
 
@@ -26,10 +25,14 @@ Below are the branch names, you can checkout into and learn the concepts,
 
 
 ---
+## Get Started !
 
-Start learning Rust programming, by cloning this repo and running `git checkout 01-Setting-up` and also in gitpod using below link.
+Start learning Rust programming, by cloning this repo and running `git checkout 01-Setting-up`.
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/krtkeyan/Rust-Learning-Basics-01-Guessing-game)
+Open in your browser with gitpod using below link.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://github.com/krtkeyan/Rust-Learning-Basics-01-Guessing-game/tree/01-Setting-up)
 
 ---
 
+Feedbacks and PR's to improve the learning experience is more welcome !
