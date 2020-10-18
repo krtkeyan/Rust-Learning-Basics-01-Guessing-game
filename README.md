@@ -1,8 +1,8 @@
 ## Learn Basics of Rust - Building Guessing game
 
->Learning by doing is always the best way to learn new concepts. It's a mixed moments of "Got it" and when you try things, you might wonder "What did I missed out" checking some syntax corrections, ups and downs but end when you make your program work, that's really a great feeling.
+>Learning by doing is always the best way to learn new concepts. It's a mixed moments of "Got it" and when you try things, you might wonder "What did I missed out" and checks some syntax corrections and finally to building something that you are proud of.
 
-This hands-on includes series of excercises, focused on concepts who might want to start learning rust programming.
+This hands-on includes 4 parts of excercises, focused on concepts who might want to start learning rust programming.
 Each excercise can be followed with set of instructions, where you will learn the concepts for the things you build.
 
 ![](https://repository-images.githubusercontent.com/305018948/018a2100-1169-11eb-9185-39a52e73ba90)
