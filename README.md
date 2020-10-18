@@ -111,11 +111,11 @@ fn main() {
     }
 
 }
-``
+```
 
 ---
 
-We have learned hands-on way to understand the basics of Rust. Let's have a recap of topic learned so far,
+We have learned the hands-on way to understand the basics of Rust. Let's have a recap of topic learned so far,
 
 1. First steps, Basics of compiling & running with Cargo.
 2. `use` statement - to bring methods, traits into scope
