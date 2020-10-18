@@ -1,8 +1,8 @@
-## Rust Learning ( Basics ) - Building a Guessing Game
+## Building a Guessing Game - 01-Setting-up
 
-In this branch, we are going to learn some basics, before we go to build our guessing game. If you already set-up the installation and know how to build and run your rust project. You may go for next chapter.
+In this excercise, we are going to learn some basics, before we go to build our guessing game. If you have already set-up the installation and know how to build and run your rust project. You may go for next chapter. Promise, it would only take few mins.
 
-#### Things covered 
+## Things covered 
 1. Install Rust in your system
 2. An overview about Cargo 
 3. Hello, Superstar 😎 !
@@ -10,13 +10,14 @@ In this branch, we are going to learn some basics, before we go to build our gue
 5. Run your first project
 6. Cargo, Run!
 
-#### 1. Installation
+---
+### 1. Installation
 
 In case, if you have not done the installation part, short steps to do that.
 
 Run, `curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh`. Once the installation succeed, `Rust is installed now. Great!` message will show up.
 
-#### 2. Cargo - Package manager
+### 2. Cargo - Package manager
 
 Cargo, is rust's build-in package manager. Like npm for node.js. You can check, cargo installed in your system. By running, `cargo --version`.
 
@@ -26,7 +27,7 @@ You can initialise a project by running, `cargo new <package-name>`. `cargo new 
 
 > This branch has been already configured with the basic structure, so you don't want to run the above steps.
 
-#### 3. Hello, Superstar 😎 !
+### 3. Hello, Superstar 😎 !
 
 Let's get into coding part and let's keep it simple. We are just gonna print your name.
 
@@ -52,17 +53,17 @@ We use `println!("")` to print whatever we want. Here we make it to print your n
 
 Go to the `src/main.rs` and follow the above steps.
 
-#### 4. Compile your first program
+### 4. Compile your first program
 
 So, next we want to see it in action, right ! To do so, we are going to look some commands. Rust, let's you build a binary that can be shared with anyone, they don't need to have rust installed in their system, unlike .py or .rb
 
 To compile a rust file, run `rustc src/main.rs`. It will generate a binary file `main` in current directory.
 
-#### 5. Run your first project
+### 5. Run your first project
 
 The binary file can be executed by `./main`. You can see the output in your terminal.
 
-#### 6. Cargo, Run!
+### 6. Cargo, Run!
 
 Cargo, simplifies the way you build your rust application.
 
