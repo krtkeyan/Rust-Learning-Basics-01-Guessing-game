@@ -77,3 +77,5 @@ If you choose to only compile and not generate any binary, you can run `cargo ch
 So you have learned with starting your first program, let's jump into building our guessing game.
 
 * Run `git checkout 02-getting-input-and-variables` to go to next step.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://github.com/krtkeyan/Rust-Learning-Basics-01-Guessing-game/tree/02-getting-input-and-variables)
