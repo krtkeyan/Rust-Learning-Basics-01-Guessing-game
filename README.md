@@ -1,77 +1,116 @@
 ## Rust Learning ( Basics ) - Building a Guessing Game
 
-In this branch, we are going to learn some basics, before we go to build our guessing game. If you already set-up the installation and know how to build and run your rust project. You may go for next chapter.
+So we are familiar with how to run our program. Let's start building our guessing game - I make a number between 1-100 and your task is to guess it. All I can give you is a hint, that the number you had guessed at the moment is less or greater than the secret. 
+
+So let's do a quick overview, what all we need to build this game.
+1. We need to generate a random secret number.
+2. We need to accept our input
+3. Compare our input with secret number.
+4. Process goes on, until we do our math to finally found the secret number.
 
 #### Things covered 
-1. Install Rust in your system
-2. An overview about Cargo 
-3. Hello, Superstar 😎 !
-4. Compile your first project
-5. Run your first project
-6. Cargo, Run!
+1. `use` statement
+2. Storing values in variables
+3. Get input from terminal
+4. Handling failures
+5. Printing values with placeholders / substitution
 
-#### 1. Installation
+---
 
-In case, if you have not done the installation part, short steps to do that.
+#### 1. `use` statement
 
-Run, `curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh`. Once the installation succeed, `Rust is installed now. Great!` message will show up.
+Rust only imports few things that are common to all programs - they are known as "prelude". There are other preludes like `std::io::prelude` that needs not to `use`ed manually, unlike default `preludes `use`ed automatically.
 
-#### 2. Cargo - Package manager
+Since we need to get input from user, we need to include that in the scope. Otherwise, rust can't find the function needed for execution.
 
-Cargo, is rust's build-in package manager. Like npm for node.js. You can check, cargo installed in your system. By running, `cargo --version`.
+So we are going to add `use` statement, to include `std::io` library, that will helps us to get input from standard input ( terminal ).
 
-You can initialise a project by running, `cargo new <package-name>`. `cargo new hello_cargo` would create you a folder named `hello-cargo`, with folder structure setup.
+Let's add `use std::io` above the main function.
 
-`Cargo.toml` is the configuration file for the project, just like `package.json` for node.js.
+#### 2. Storing values in variables
 
-> This branch has been already configured with the basic structure, so you don't want to run the above steps.
+Before we get input from terminal, we need to store the value from terminal into a variable, to use it in our program.
 
-#### 3. Hello, Superstar 😎 !
+To create a string variable, we can use `let variable_name = String::new()`. `let` helps us to create a variable. `String::new` function returns the instance of `String` type.
 
-Let's get into coding part and let's keep it simple. We are just gonna print your name.
+One thing to remember is, rust by default creates immutable variables, meaning values cannot be changed. Our guess is a repeated process, that we need to overwrite previous value, which means we do some mutation here. To make it mutable we need to add `mut` after `let` part.
 
-Cargo, looks into your `src` folder and start from `main.rs`. We are going to edit that file, now!
+So, let's create our guess variable and make it as a string.
 
-*Rust, starts execution from `main` function.*
+```rust
+    let mut guess = String::new();
+```
 
-So, we are going to create our main function first. `fn` defines the function, followed by function name - `main` in our case.
+#### 3. Get input from terminal
 
-`fn main() {
-    
-}`
+First thing, let's get an idea how can we give input to the guessing game. To do that we need to know how to read input from terminal.
 
-Great, we got our function. Let's make it to print your name next.
+```rust
+    io::stdin().read_line(var)
+```
 
-`println!("Hello, Superstar 😎 !"); // You are really a Superstar`
+Since we already bought, `io` into scope by adding, `use` at the top, we can access the `stdin` function.
 
-*println is a macro. Because, it ends with an !(exclamation) - Just remember that. It's not a function as it seems`
+`::` operator is path separator, used to separate crate, modules and items. Here `std` is a crate and `io` is a module. Maybe think of it as a `/` in `lodash/sort`. `lodash` is a package and it hold the sort module.
 
-We use `println!("")` to print whatever we want. Here we make it to print your name. 
+If we didn't add the `use` at the top, we can rewrite it as,
 
-Go to the `src/main.rs` and follow the above steps.
+```rust
+    std::io::stdin().read_line(var)
+```
 
-#### 4. Compile your first program
-
-So, next we want to see it in action, right ! To do so, we are going to look some commands. Rust, let's you build a binary that can be shared with anyone, they don't need to have rust installed in their system, unlike .py or .rb
-
-To compile a rust file, run `rustc src/main.rs`. It will generate a binary file `main` in current directory.
-
-#### 5. Run your first project
-
-The binary file can be executed by `./main`. You can see the output in your terminal.
-
-#### 6. Cargo, Run!
-
-Cargo, simplifies the way you build your rust application.
-
-You can compile and build and run your application in one step - `cargo run`. It compiles your application and let you know any errors, if any. And build your application and produce the output in `target/debug`. You can find a binary file with package name as in `Cargo.toml`.
-
-To build a production ready version, you can run `cargo run --release`
-
-If you choose run manually, after compile & build, you can run `cargo build`.
-If you choose to only compile and not generate any binary, you can run `cargo check`. It's useful if we want to check periodically, programs run without errors and it's fast.
+`stdin` function returns an instance of `std::io::Stdin`, handle that represents the standard input from terminal. `read_line` is a function that is part of that handle, which reads the standard input from terminal and save it in `var`.
 
 
-So you have learned with starting your first program, let's jump into building our guessing game.
+To save the input into our `guess` variable, we can write our program as,
 
-* Run `git checkout 02-getting-input-and-variables` to go to next step.
+```rust
+    io::stdin()
+        .read_line(&mut guess);
+```
+
+The value returned from terminal will be saved into the reference of guess. It's like `scanf("%d",&a)` in C, you save it in the reference / location of `guess` variable without additional memory.
+
+`&mut` before guess, is to instruct that it will be mutable as references also immutable by default. Since we are going to read input from user, repeatedly into the `&guess`.
+
+#### 4. Handling failures
+
+Let's make our program resilent, handling potential failures.
+
+`read_line` function returns the instance of `io::Result` of type `enum` - it means value can be either `Ok` - for success or `Err` - For failure. We are going to add `expect` function at the end which captures in case of failure and displays the message given.
+
+Our program becomes,
+
+```rust
+    io::stdin()
+        .read_line(&mut guess)
+        .expect("Failed to get number");
+```
+
+#### 5. Printing values with placeholders / substitution
+
+Let's print out the value we entered in terminal and currently stored in guess. `{}` can be used within our print statement, to replace with actual value. It's like `printf("%d",a)` in C.
+
+Our final program, so far in this chapter will be,
+
+```rust
+    use std::io;
+
+    fn main() {
+        println!("What's your guess (1-100)");
+
+        let mut guess = String::new();
+
+        io::stdin()
+        .read_line(&mut guess)
+        .expect("Failed to get number");
+
+        println!("Input given is {}",guess);
+    }
+```
+
+Time to check our progress so far, run `cargo run` to see the output.
+
+Next, we will generate a random secret and compare with our guess.
+
+Run, `git checkout 03-external-dependencies-and-match-expr` to go to next chapter.
