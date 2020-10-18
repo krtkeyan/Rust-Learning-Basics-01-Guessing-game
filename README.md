@@ -1,73 +1,78 @@
 ## Rust Learning ( Basics ) - Building a Guessing Game
-In previous step, we learned to read input from the user and have it saved to `guess` variable. Now, we need to generate our secret number and have it compared to the guess.
+We have made our program to validate our first guess. But to make it more fun, we need to make our program to allow us more guessing until we manage to guess out the secret. Let's add this one final part, and try out our finishing game.
 
+### Things covered
+1. Loops and break 
+2. Error handling - Handling invalid inputs
+3. The Guessing game !
 
-#### Things covered 
-1. Using external crate
-2. Generating random secret using `rand` crate
-3. Comparing using `match` expression
-4. Shadowing & `parse` function to typecase string to number type.
-5. Matching out our first guess !
 ---
 
-### 1. Using external crate
+### 1. Loops and break 
 
-Rust, doesn't support random number generation by default. But we can make use of external crates to extend the functionality to our program.
+We can make our program, to run repeatedly by wraping the statements with `loop`.
 
-Add the following snippet to your `Cargo.toml` configuration file and install [rand](https://crates.io/crates/rand).
+```rust
+    loop {
+        println!("What's your guess (1-100)");
+        let mut guess = String::new();
+
+        io::stdin()
+            .read_line(&mut guess)
+            .expect("Failed to get number");
+
+        let guess: u32 = guess.trim().parse().expect("Only number is accepted");
+        println!("Input given is {}",guess);
+
+        match guess.cmp(&secret) {
+            Ordering::Less => println!("You Guess, is less than secret."),
+            Ordering::Greater => println!("You Guess, is greater than secret."),
+            Ordering::Equal => println!("Bingo!. You made it"),
+        }
+    }
 ```
-    [dependencies]
-    rand = "0.7.2"
-```
-Now run `cargo build` to download crate into your package. 
 
-### 2. Generating random secret using `rand` crate
+Now, we can run it up! and see we have made our guessing game. We can play it, by guessing and narrowing down our secret with Less & Greater cue.
 
-Now, let's generate our secret number. Just like `stdin` function needs `std::io` in it's scope. `rand::thread_rng()`, generates random number local to current thread. 
+One thing, you might notice that, the program keep on running, even we hit our *Bingo*
 
-This function followed by `gen_range` method, generates random number between two ranges, needs to define `rand::Rng` trait at its scope, as it requires this trait to implement in its scope ( Traits are like interfaces that need to be implemented ). 
-
-So, 
-  1. We add `rand::Rng` trait to scope, by `use rand::Rng` at top.
-  2. `let secret = rand::thread_rng().get_range(1,100)`, in our main function to generate and save it to a variable.
-
-### 3. Comparing using `match` expression
-
-To compare, guess and secret, we can use `cmp` method - `guess.cmp(&secret)`. The call to `cmp` method returns `std::cmp::Ordering` . `Ordering` is an enum type, with values `Less, Greater or Equal`. We need to handle the three possible outcomes, to determine what to do next.
-
-`match` expression can be used to do that. It consists of arm, with pattern first and second what to do if pattern matched.
-
-So let's write some code now,
+To stop the program in that case, we might need to add `break` statement, which exits out of `loop`.
 
 ```rust
     match guess.cmp(&secret) {
-        std::cmp::Ordering::Less => println!("You Guess, is less than secret."),
-        std::cmp::Ordering::Greater => println!("You Guess, is greater than secret."),
-        std::cmp::Ordering::Equal => println!("Bingo!. You made it"),
+        Ordering::Less => println!("You Guess, is less than secret."),
+        Ordering::Greater => println!("You Guess, is greater than secret."),
+        Ordering::Equal => {
+            println!("Bingo!. You made it");
+            break;
+        },
     }
 ```
-Instead of repeating `std::cmp` to bring into scope for enum values `Less` we can add it to top as `use std::cmp::Ordering`;
 
-Let's run our code, so far using `cargo run`.
+### 2. Error handling - Handling invalid inputs
 
-#### 4. Shadowing & `parse` function to typecase string to number type.
+Next thing, we might notice our program fails if we enter text instead of number. We should handle that case too.
 
-You might find our program, throws error regarding type mismatch. `cmp` method expects both types to be same.
-Let us change our `guess` variable to number type, to match it with secret type. `guess.trim().parse()` method first trims new-lines from standard output, `parse` method on strings changes it to number.
+`parse` method returns Result type of enum, Ok or Err. We might need handle to skip the current input in the loop and go to next iteration. `continue` statement tells program to go to next iteration of loop, skipping anything below the current execution.
 
-What if, we gave string as input ? We might want to handle that too. Add `expect("Only number is accepted")` to the parse, that return `Result` type.
-
-Now, we need to save this value to a variable. Our original `guess` variable is of `String` type, we can shadow the original variable with new number type ( u32 - unsigned 32bit integers as only positive numbers are in our range ).
-
-We can shadow it by,
+First, we might want to `match` the Return types and act based on that. To do so,
 
 ```rust
-let guess: u32 = guess.trim().parse().expect("Only number is accepted");
+    match guess.trim().parse() {
+        Ok(num) => num,
+        Err(_) => continue
+    }
 ```
 
-#### 5. Matching out our first guess !
+1. `Ok(num)` in the first arm pattern, will make match return the `num` value returned from `parse` method. 
+2. `Err(_)` in the second arm, we can add `continue` to skip current iteration, `_` catches all `Err` values.
 
-Let's run our program, with `cargo run` to check out our first guess.
+
+### 3. The Guessing game !
+
+That's it. We can play with the guessing game by narrowing down our guess with help of cue. More fun, if we extend our secret range generated.
+
+Final program will be,
 
 ```rust
 use std::io;
@@ -77,28 +82,50 @@ use std::cmp::Ordering;
 fn main() {
 
     let secret = rand::thread_rng().gen_range(1,100);
+        
+    loop {
+        println!("What's your guess (1-100)");
+    
+        let mut guess = String::new();
 
-    println!("What's your guess (1-100)");
-    let mut guess = String::new();
+        io::stdin()
+            .read_line(&mut guess)
+            .expect("Failed to get number");
 
-    io::stdin()
-        .read_line(&mut guess)
-        .expect("Failed to get number");
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("Only number is accepted :(, Try again!");
+                continue;
+            },
+        };
 
-    let guess: u32 = guess.trim().parse().expect("Only number is accepted");
-    println!("Input given is {}",guess);
-
-    match guess.cmp(&secret) {
-        Ordering::Less => println!("You Guess, is less than secret."),
-        Ordering::Greater => println!("You Guess, is greater than secret."),
-        Ordering::Equal => println!("Bingo!. You made it"),
+        match guess.cmp(&secret) {
+            Ordering::Less => println!("You Guess, is less than secret."),
+            Ordering::Greater => println!("You Guess, is greater than secret."),
+            Ordering::Equal => {
+                println!("Bingo!. You made it");
+                break;
+            },
+        }
     }
+
 }
-```
+``
 
-That's great ! We made our program to check our guess with the secret number. 
+---
 
-But, it seems we might only do one guess, we need our program to run until we guess out. Next, we will finish up our guessing game, by making our program to keep asking our input until it matches out. 
+We have learned hands-on way to understand the basics of Rust. Let's have a recap of topic learned so far,
 
+1. First steps, Basics of compiling & running with Cargo.
+2. `use` statement - to bring methods, traits into scope
+3. Creating variables, Shadowing variables ( Mutatable & Immutable )
+4. Getting standard input from terminal
+5. Printing value to the standard output
+6. Adding external crates into the application
+7. `match` expression and arm pattern for decision making
+8. `loop` keyword, `break` and `continue`
+9. Handling errors using `expect`
 
-Run, `git checkout 04-loops-and-finish-up-guessing-game` to go to next chapter.
+While we understand the origins of these concepts, next we can explore deep into these concepts to learn Rust.
+Bon Voyage !
