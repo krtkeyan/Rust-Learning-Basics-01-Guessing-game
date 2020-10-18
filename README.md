@@ -115,4 +115,4 @@ Next, we will generate a random secret and compare with our guess.
 
 Run, `git checkout 03-external-dependencies-and-match-expr` to go to next chapter or in gitpod.
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://github.com/krtkeyan/Rust-Learning-Basics-01-Guessing-game/tree/03-external-dependencies-and-match-expr)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/krtkeyan/Rust-Learning-Basics-01-Guessing-game/tree/03-external-dependencies-and-match-expr)
