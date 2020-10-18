@@ -1,116 +1,104 @@
 ## Rust Learning ( Basics ) - Building a Guessing Game
+In previous step, we learned to read input from the user and have it saved to `guess` variable. Now, we need to generate our secret number and have it compared to the guess.
 
-So we are familiar with how to run our program. Let's start building our guessing game - I make a number between 1-100 and your task is to guess it. All I can give you is a hint, that the number you had guessed at the moment is less or greater than the secret. 
-
-So let's do a quick overview, what all we need to build this game.
-1. We need to generate a random secret number.
-2. We need to accept our input
-3. Compare our input with secret number.
-4. Process goes on, until we do our math to finally found the secret number.
 
 #### Things covered 
-1. `use` statement
-2. Storing values in variables
-3. Get input from terminal
-4. Handling failures
-5. Printing values with placeholders / substitution
-
+1. Using external crate
+2. Generating random secret using `rand` crate
+3. Comparing using `match` expression
+4. Shadowing & `parse` function to typecase string to number type.
+5. Matching out our first guess !
 ---
 
-#### 1. `use` statement
+### 1. Using external crate
 
-Rust only imports few things that are common to all programs - they are known as "prelude". There are other preludes like `std::io::prelude` that needs not to `use`ed manually, unlike default `preludes `use`ed automatically.
+Rust, doesn't support random number generation by default. But we can make use of external crates to extend the functionality to our program.
 
-Since we need to get input from user, we need to include that in the scope. Otherwise, rust can't find the function needed for execution.
-
-So we are going to add `use` statement, to include `std::io` library, that will helps us to get input from standard input ( terminal ).
-
-Let's add `use std::io` above the main function.
-
-#### 2. Storing values in variables
-
-Before we get input from terminal, we need to store the value from terminal into a variable, to use it in our program.
-
-To create a string variable, we can use `let variable_name = String::new()`. `let` helps us to create a variable. `String::new` function returns the instance of `String` type.
-
-One thing to remember is, rust by default creates immutable variables, meaning values cannot be changed. Our guess is a repeated process, that we need to overwrite previous value, which means we do some mutation here. To make it mutable we need to add `mut` after `let` part.
-
-So, let's create our guess variable and make it as a string.
-
-```rust
-    let mut guess = String::new();
+Add the following snippet to your `Cargo.toml` configuration file and install [rand](https://crates.io/crates/rand).
 ```
-
-#### 3. Get input from terminal
-
-First thing, let's get an idea how can we give input to the guessing game. To do that we need to know how to read input from terminal.
-
-```rust
-    io::stdin().read_line(var)
+    [dependencies]
+    rand = "0.7.2"
 ```
+Now run `cargo build` to download crate into your package. 
 
-Since we already bought, `io` into scope by adding, `use` at the top, we can access the `stdin` function.
+### 2. Generating random secret using `rand` crate
 
-`::` operator is path separator, used to separate crate, modules and items. Here `std` is a crate and `io` is a module. Maybe think of it as a `/` in `lodash/sort`. `lodash` is a package and it hold the sort module.
+Now, let's generate our secret number. Just like `stdin` function needs `std::io` in it's scope. `rand::thread_rng()`, generates random number local to current thread. 
 
-If we didn't add the `use` at the top, we can rewrite it as,
+This function followed by `gen_range` method, generates random number between two ranges, needs to define `rand::Rng` trait at its scope, as it requires this trait to implement in its scope ( Traits are like interfaces that need to be implemented ). 
 
-```rust
-    std::io::stdin().read_line(var)
-```
+So, 
+  1. We add `rand::Rng` trait to scope, by `use rand::Rng` at top.
+  2. `let secret = rand::thread_rng().get_range(1,100)`, in our main function to generate and save it to a variable.
 
-`stdin` function returns an instance of `std::io::Stdin`, handle that represents the standard input from terminal. `read_line` is a function that is part of that handle, which reads the standard input from terminal and save it in `var`.
+### 3. Comparing using `match` expression
 
+To compare, guess and secret, we can use `cmp` method - `guess.cmp(&secret)`. The call to `cmp` method returns `std::cmp::Ordering` . `Ordering` is an enum type, with values `Less, Greater or Equal`. We need to handle the three possible outcomes, to determine what to do next.
 
-To save the input into our `guess` variable, we can write our program as,
+`match` expression can be used to do that. It consists of arm, with pattern first and second what to do if pattern matched.
 
-```rust
-    io::stdin()
-        .read_line(&mut guess);
-```
-
-The value returned from terminal will be saved into the reference of guess. It's like `scanf("%d",&a)` in C, you save it in the reference / location of `guess` variable without additional memory.
-
-`&mut` before guess, is to instruct that it will be mutable as references also immutable by default. Since we are going to read input from user, repeatedly into the `&guess`.
-
-#### 4. Handling failures
-
-Let's make our program resilent, handling potential failures.
-
-`read_line` function returns the instance of `io::Result` of type `enum` - it means value can be either `Ok` - for success or `Err` - For failure. We are going to add `expect` function at the end which captures in case of failure and displays the message given.
-
-Our program becomes,
+So let's write some code now,
 
 ```rust
-    io::stdin()
-        .read_line(&mut guess)
-        .expect("Failed to get number");
-```
-
-#### 5. Printing values with placeholders / substitution
-
-Let's print out the value we entered in terminal and currently stored in guess. `{}` can be used within our print statement, to replace with actual value. It's like `printf("%d",a)` in C.
-
-Our final program, so far in this chapter will be,
-
-```rust
-    use std::io;
-
-    fn main() {
-        println!("What's your guess (1-100)");
-
-        let mut guess = String::new();
-
-        io::stdin()
-        .read_line(&mut guess)
-        .expect("Failed to get number");
-
-        println!("Input given is {}",guess);
+    match guess.cmp(&secret) {
+        std::cmp::Ordering::Less => println!("You Guess, is less than secret."),
+        std::cmp::Ordering::Greater => println!("You Guess, is greater than secret."),
+        std::cmp::Ordering::Equal => println!("Bingo!. You made it"),
     }
 ```
+Instead of repeating `std::cmp` to bring into scope for enum values `Less` we can add it to top as `use std::cmp::Ordering`;
 
-Time to check our progress so far, run `cargo run` to see the output.
+Let's run our code, so far using `cargo run`.
 
-Next, we will generate a random secret and compare with our guess.
+#### 4. Shadowing & `parse` function to typecase string to number type.
 
-Run, `git checkout 03-external-dependencies-and-match-expr` to go to next chapter.
+You might find our program, throws error regarding type mismatch. `cmp` method expects both types to be same.
+Let us change our `guess` variable to number type, to match it with secret type. `guess.trim().parse()` method first trims new-lines from standard output, `parse` method on strings changes it to number.
+
+What if, we gave string as input ? We might want to handle that too. Add `expect("Only number is accepted")` to the parse, that return `Result` type.
+
+Now, we need to save this value to a variable. Our original `guess` variable is of `String` type, we can shadow the original variable with new number type ( u32 - unsigned 32bit integers as only positive numbers are in our range ).
+
+We can shadow it by,
+
+```rust
+let guess: u32 = guess.trim().parse().expect("Only number is accepted");
+```
+
+#### 5. Matching out our first guess !
+
+Let's run our program, with `cargo run` to check out our first guess.
+
+```rust
+use std::io;
+use rand::Rng;
+use std::cmp::Ordering;
+
+fn main() {
+
+    let secret = rand::thread_rng().gen_range(1,100);
+
+    println!("What's your guess (1-100)");
+    let mut guess = String::new();
+
+    io::stdin()
+        .read_line(&mut guess)
+        .expect("Failed to get number");
+
+    let guess: u32 = guess.trim().parse().expect("Only number is accepted");
+    println!("Input given is {}",guess);
+
+    match guess.cmp(&secret) {
+        Ordering::Less => println!("You Guess, is less than secret."),
+        Ordering::Greater => println!("You Guess, is greater than secret."),
+        Ordering::Equal => println!("Bingo!. You made it"),
+    }
+}
+```
+
+That's great ! We made our program to check our guess with the secret number. 
+
+But, it seems we might only do one guess, we need our program to run until we guess out. Next, we will finish up our guessing game, by making our program to keep asking our input until it matches out. 
+
+
+Run, `git checkout 04-loops-and-finish-up-guessing-game` to go to next chapter.
