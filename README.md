@@ -11,7 +11,7 @@ Below are the branch names, you can checkout into and learn the concepts,
 3. [`03-external-dependencies-and-match-expr`](https://github.com/krtkeyan/Rust-Learning-Basics-01-Guessing-game/tree/02-getting-input-and-variables)
 4. [`04-loops-and-finish-up-guessing-game`](https://github.com/krtkeyan/Rust-Learning-Basics-01-Guessing-game/tree/02-getting-input-and-variables)
 
-#### Concepts you will learn, while you building guessing game
+## Concepts you will learn, while you building guessing game
 
 1. First steps, Basics of compiling & running with Cargo.
 2. `use` statement - to bring methods, traits into scope
@@ -25,7 +25,7 @@ Below are the branch names, you can checkout into and learn the concepts,
 
 
 ---
-## Get Started !
+# Get Started !
 
 Start learning Rust programming, by cloning this repo and running `git checkout 01-Setting-up`.
 
@@ -35,4 +35,5 @@ Open in your browser with gitpod using below link.
 
 ---
 
+I documented the concepts, while I was enjoy learning the * [Rust Programming Language By Steve klabnik](https://doc.rust-lang.org/book/title-page.html) *
 Feedbacks and PR's to improve the learning experience is more welcome !
