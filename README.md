@@ -10,8 +10,8 @@ Each excercise can be followed with set of instructions, where you will learn th
 Below are the branch names, you can checkout into and learn the concepts,
 1. [`01-Setting-up`](https://github.com/krtkeyan/Rust-Learning-Basics-01-Guessing-game/tree/01-Setting-up) ( Installtion and running rust programs )
 2. [`02-getting-input-and-variables`](https://github.com/krtkeyan/Rust-Learning-Basics-01-Guessing-game/tree/02-getting-input-and-variables)
-3. [`03-external-dependencies-and-match-expr`](https://github.com/krtkeyan/Rust-Learning-Basics-01-Guessing-game/tree/02-getting-input-and-variables)
-4. [`04-loops-and-finish-up-guessing-game`](https://github.com/krtkeyan/Rust-Learning-Basics-01-Guessing-game/tree/02-getting-input-and-variables)
+3. [`03-external-dependencies-and-match-expr`](https://github.com/krtkeyan/Rust-Learning-Basics-01-Guessing-game/tree/03-external-dependencies-and-match-expr)
+4. [`04-loops-and-finish-up-guessing-game`](https://github.com/krtkeyan/Rust-Learning-Basics-01-Guessing-game/tree/04-loops-and-finish-up-guessing-game)
 
 ## Concepts you will learn, while you building guessing game
 
