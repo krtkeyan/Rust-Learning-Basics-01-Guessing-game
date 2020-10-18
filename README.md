@@ -102,4 +102,5 @@ But, it seems we might only do one guess, we need our program to run until we gu
 
 
 Run, `git checkout 04-loops-and-finish-up-guessing-game` to go to next chapter.
+
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://github.com/krtkeyan/Rust-Learning-Basics-01-Guessing-game/tree/04-loops-and-finish-up-guessing-game)
