@@ -36,9 +36,11 @@ Cargo, looks into your `src` folder and start from `main.rs`. We are going to ed
 
 So, we are going to create our main function first. `fn` defines the function, followed by function name - `main` in our case.
 
-`fn main() {
+```rust
+fn main() {
     
-}`
+}
+```
 
 Great, we got our function. Let's make it to print your name next.
 
