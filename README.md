@@ -2,10 +2,10 @@
 
 >Learning by doing is always the best way to learn new concepts. It's a mixed moments of "Got it" and when you try things, you might wonder "What did I missed out" and checks some syntax corrections and finally to building something that you are proud of.
 
-This hands-on includes 4 parts of excercises, focused on concepts who might want to start learning rust programming.
-Each excercise can be followed with set of instructions, where you will learn the concepts for the things you build.
+This hands-on includes 4 part- excercises, focused on learning concepts who might want to start learning rust programming.
+Each excercise can be followed with step by step guide, where you will learn the concepts while you build.
 
-![](https://repository-images.githubusercontent.com/305018948/018a2100-1169-11eb-9185-39a52e73ba90)
+![](https://repository-images.githubusercontent.com/305018948/d27e3f080-118e-11eb-8dff-14791d917f36)
 
 Below are the branch names, you can checkout into and learn the concepts,
 1. [`01-Setting-up`](https://github.com/krtkeyan/Rust-Learning-Basics-01-Guessing-game/tree/01-Setting-up) ( Installtion and running rust programs )
@@ -31,7 +31,7 @@ Below are the branch names, you can checkout into and learn the concepts,
 
 Start learning Rust programming, by cloning this repo and running `git checkout 01-Setting-up`.
 
-Open in your browser with gitpod using below link.
+*Or to open in your browser without any local setup, try gitpod.*
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/krtkeyan/Rust-Learning-Basics-01-Guessing-game/tree/01-Setting-up)
 
