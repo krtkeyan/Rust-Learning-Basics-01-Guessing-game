@@ -5,7 +5,7 @@
 This hands-on includes 4 part- excercises, focused on learning concepts who might want to start learning rust programming.
 Each excercise can be followed with step by step guide, where you will learn the concepts while you build.
 
-![](https://repository-images.githubusercontent.com/305018948/d27e3f080-118e-11eb-8dff-14791d917f36)
+![](https://res.cloudinary.com/dojgeix1u/image/upload/v1603039672/Twitter_Post_-_6_1_cxog2y.png)
 
 Below are the branch names, you can checkout into and learn the concepts,
 1. [`01-Setting-up`](https://github.com/krtkeyan/Rust-Learning-Basics-01-Guessing-game/tree/01-Setting-up) ( Installtion and running rust programs )
