@@ -33,7 +33,7 @@ Start learning Rust programming, by cloning this repo and running `git checkout 
 
 Open in your browser with gitpod using below link.
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://github.com/krtkeyan/Rust-Learning-Basics-01-Guessing-game/tree/01-Setting-up)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/krtkeyan/Rust-Learning-Basics-01-Guessing-game/tree/01-Setting-up)
 
 ---
 
