@@ -13,6 +13,9 @@ Below are the branch names, you can checkout into and learn the concepts,
 3. [`03-external-dependencies-and-match-expr`](https://github.com/krtkeyan/Rust-Learning-Basics-01-Guessing-game/tree/03-external-dependencies-and-match-expr)
 4. [`04-loops-and-finish-up-guessing-game`](https://github.com/krtkeyan/Rust-Learning-Basics-01-Guessing-game/tree/04-loops-and-finish-up-guessing-game)
 
+To start playing with the guessing game, click the gitpod link below and run `cargo run` in the terminal.
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/krtkeyan/Rust-Learning-Basics-01-Guessing-game)
+
 ## Concepts you will learn, while you building guessing game
 
 1. First steps, Basics of compiling & running with Cargo.
